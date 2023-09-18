@@ -17,8 +17,8 @@ class WeatherApp extends ConsumerStatefulWidget {
 }
 
 class _WeatherAppState extends ConsumerState<WeatherApp> {
- //  String city = '';
- // //
+ //   String city = '';
+ // // //
  // @override
  //  void didChangeDependencies() async{
  //   if(sharedPref.getString('city') != ''){
@@ -27,11 +27,8 @@ class _WeatherAppState extends ConsumerState<WeatherApp> {
  //     city = sharedPref.getString('city');
  //     // String city = sharedPref.getString('city');
  //     final state = ref.read(weatherNotifier.notifier);
- //     await state.fetchWeather(city);
+ //     state.fetchWeather(city).then((value) => setState(() {}));
  //   }
- //   setState(() {
- //
- //   });
  //    super.didChangeDependencies();
  //  }
 

@@ -11,33 +11,12 @@ import 'widgets/weather_error.dart';
 import 'widgets/weather_loading.dart';
 import 'widgets/weather_populated_new.dart';
 
-
-// class WeatherPage extends StatelessWidget {
-//   const WeatherPage({super.key});
-//
-// @override
-// Widget build(BuildContext context) {
-//   return  const WeatherView();
-//
-// }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return BlocProvider(
-  //     create: (context) => WeatherCubit(context.read<WeatherRepository>()),
-  //     child: const WeatherView(),
-  //   );
-  // }
-//}
-
-
-
 class WeatherPage extends ConsumerWidget {
   WeatherPage({super.key});
  // String city = '';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(weatherNotifier);
+   // final state = ref.watch(weatherNotifier);
    //final city = ref.watch(cityProvider);
    // final state1 = ref.listen(weatherNotifier, (previous, next) {
    //   if(next.status == WeatherStatus.loading){
@@ -78,7 +57,7 @@ class WeatherPage extends ConsumerWidget {
         //  child: Consumer(builder: (context, ref, child) {
 child:Builder(builder: (BuildContext context) {
  // print('WeatherPage - Builder ${state.status}');
-
+  final state = ref.watch(weatherNotifier);
   switch (state.status) {
     case WeatherStatus.initial:
     // if(city != ''){
