@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'presentation/app.dart';
 
 
-late final sharedPref;
+late final SharedPreferences sharedPref;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
