@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_weather/main.dart';
-import 'package:riverpod_weather/weather/models/weather_models.dart';
-import '../weather/state/weather_notifier.dart';
+import 'package:weather_riverpod_async/domain/weather_models.dart';
+
+import '../../state/weather/weather_notifier.dart';
 
 
 //class SettingsPage extends StatelessWidget {

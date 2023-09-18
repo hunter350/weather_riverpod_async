@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../main.dart';
+import '../../state/theme/theme_state.dart';
+import '../../state/weather/weather_notifier.dart';
+
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
