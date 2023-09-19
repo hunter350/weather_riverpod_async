@@ -7,7 +7,7 @@ import '../state/weather/weather_notifier.dart';
 import 'weather_page/weather_page.dart';
 
 
-String cityFromShared = sharedPref.getString('city');
+String? cityFromShared = sharedPref.getString('city');
 
 class WeatherApp extends ConsumerStatefulWidget {
   const WeatherApp({super.key});

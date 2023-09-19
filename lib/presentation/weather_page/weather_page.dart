@@ -23,7 +23,7 @@ class WeatherPage extends ConsumerWidget {
    //     next.weatherModels.;
    //   }
    // });
-    String cityShared = sharedPref.getString('city');
+    String? cityShared = sharedPref.getString('city');
 
    print('WeatherPage to city - $cityShared');
 
@@ -34,7 +34,7 @@ class WeatherPage extends ConsumerWidget {
           IconButton(
               icon: const Icon(Icons.update),
               onPressed: () {
-                String city = sharedPref.getString('city');
+                String? city = sharedPref.getString('city');
                 if(city != ''){
                   ref.read(weatherNotifier.notifier).fetchWeather(city);
                 }
