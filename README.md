@@ -18,4 +18,5 @@ This application uses a layered architecture, using the example of the Black pac
 To make the application more interesting,
 we have added animations depending on weather conditions.
 
+https://github.com/hunter350/weather_riverpod_async/assets/71131485/d74bfff9-a859-458c-9a4a-90ec18273035
 
