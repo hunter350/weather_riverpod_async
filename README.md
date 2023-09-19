@@ -1,8 +1,7 @@
-<center>
 <h1>
   <img src="https://github.com/hunter350/weather_riverpod_async/blob/master/icon_git_v1.png" alt="Image" width="40" style="border-radius: 10px;">  Weather riverpod async</img>
 </h1>
-</center>
+
 
 Weather app using Riverpod this Async Value to check weather 
 and make animation with depends conditions.
