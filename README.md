@@ -8,15 +8,14 @@ and make animation with depends conditions.
 
 ## Architecture
 
-This application uses a layered architecture, using the example of the Black package, only we use Roverpad:
+This application uses a layered architecture, using the example of the Black package, only we use Riverpad:
 1. Presentation
 2. State
 3. Domain
 4. Data
 
 ## Animations
-To make the application more interesting,
-we have added animations depending on weather conditions.
+To make the application more interesting, we have added animations depending on weather conditions.
 
 https://github.com/hunter350/weather_riverpod_async/assets/71131485/d74bfff9-a859-458c-9a4a-90ec18273035
 
