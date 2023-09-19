@@ -29,8 +29,7 @@ class _WeatherAppState extends ConsumerState<WeatherApp> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final color = ref.watch(themeState);//Тему здесь меняю
-
+    final color = ref.watch(themeState); //Тему здесь меняю
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

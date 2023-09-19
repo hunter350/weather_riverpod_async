@@ -1,7 +1,7 @@
 # weather_riverpod_async
 
-Weather app using Riverpod this Async Value to check weather and make animation 
-with depends conditions.  
+Weather app using Riverpod this Async Value to check weather and make animation
+with depends conditions.
 
 ## Getting Started
 

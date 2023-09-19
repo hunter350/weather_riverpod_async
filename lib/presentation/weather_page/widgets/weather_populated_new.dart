@@ -37,21 +37,26 @@ class WeatherPopulatedNew extends ConsumerWidget {
                 children: [
                   const SizedBox(height: 48),
                   _WeatherIcon(condition: weatherModels.condition),
+                  Text(weatherModels.location,
+                      style: theme.textTheme
+                          .apply(bodyColor: Colors.white)
+                          .headline2
+                          ?.copyWith(
+                            fontWeight: FontWeight.w200,
+                          )),
+                  Text(weatherModels.formattedTemperature(units),
+                      style: theme.textTheme
+                          .apply(bodyColor: Colors.white)
+                          .headline3
+                      //     .copyWith(
+                      //   fontWeight: FontWeight.bold,
+                      // ),
+                      ),
                   Text(
-                    weatherModels.location,
-                    style: theme.textTheme.headline2?.copyWith(
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  Text(
-                    weatherModels.formattedTemperature(units),
-                    style: theme.textTheme.headline3?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    '''Last Updated at ${TimeOfDay.fromDateTime(weatherModels.lastUpdated).format(context)}''',
-                  ),
+                      '''Last Updated at ${TimeOfDay.fromDateTime(weatherModels.lastUpdated).format(context)}''',
+                      style: theme.textTheme
+                          .apply(bodyColor: Colors.white38)
+                          .titleSmall),
                 ],
               ),
             ),
