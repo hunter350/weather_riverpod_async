@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../main.dart';
 import '../../state/theme/theme_state.dart';
 import '../../state/weather/weather_notifier.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
-
-  //SearchPage._();
-
-  // static Route<String> route() {
-  //   return MaterialPageRoute(builder: (_) => const SearchPage._());
-  // }
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -31,10 +24,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    //final status = ref.watch(weatherNotifier.notifier).state.status;
-    // final status = ref.watch(weatherNotifier).status;
-    // print('search_page_status 1: ${status}');
-
     return Scaffold(
       appBar: AppBar(title: const Text('City Search')),
       body: Row(
@@ -69,7 +58,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
                   Navigator.of(context).pop();
                 });
-              })
+              }),
         ],
       ),
     );
