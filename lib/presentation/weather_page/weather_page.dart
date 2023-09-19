@@ -17,7 +17,7 @@ class WeatherPage extends ConsumerWidget {
   // String city = '';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-     String? cityShared = sharedPref.getString('city');
+    String? cityShared = sharedPref.getString('city');
     final state = ref.watch(weatherNotifier);
 
     return Scaffold(
@@ -122,4 +122,3 @@ class WeatherPage extends ConsumerWidget {
     );
   }
 }
-

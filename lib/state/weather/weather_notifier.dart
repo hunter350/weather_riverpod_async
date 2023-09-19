@@ -95,9 +95,9 @@ extension on double {
   double toCelsius() => (this - 32) * 5 / 9;
 }
 
-//final weatherNotifier = StateNotifierProvider((ref) => WeatherNotifier());
 final weatherNotifier = StateNotifierProvider<WeatherNotifier, WeatherState>(
     (ref) => WeatherNotifier());
+
 final futureWeatherNotifier = FutureProvider((ref) {
   final futureWeather = ref.watch(weatherNotifier);
   // futureWeather.fetchWeather(city);

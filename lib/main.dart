@@ -10,7 +10,6 @@ void main() async {
   sharedPref = await SharedPreferences.getInstance();
   if (sharedPref.getString('city') == null) {
     sharedPref.setString('city', '');
-    //style = 'first';
   }
   runApp(const ProviderScope(child: WeatherApp()));
 }
