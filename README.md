@@ -1,17 +1,22 @@
-# weather_riverpod_async
+<center>
+<h1>
+  <img src="https://github.com/hunter350/weather_riverpod_async/blob/master/icon_git_v1.png" alt="Image" width="40" style="border-radius: 10px;">  Weather riverpod async</img>
+</h1>
+</center>
 
-Weather app using Riverpod this Async Value to check weather and make animation
-with depends conditions.
+Weather app using Riverpod this Async Value to check weather 
+and make animation with depends conditions.
 
-## Getting Started
+## Architecture
 
-This project is a starting point for a Flutter application.
+This application uses a layered architecture, using the example of the Black package, only we use Roverpad:
+1. Presentation
+2. State
+3. Domain
+4. Data
 
-A few resources to get you started if this is your first Flutter project:
+## Animations
+To make the application more interesting,
+we have added animations depending on weather conditions.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
