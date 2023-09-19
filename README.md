@@ -1,6 +1,7 @@
 # weather_riverpod_async
 
-A new Flutter project.
+Weather app using Riverpod this Async Value to check weather and make animation 
+with depends conditions.  
 
 ## Getting Started
 
