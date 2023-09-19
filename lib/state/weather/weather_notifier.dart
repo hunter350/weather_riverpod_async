@@ -99,4 +99,4 @@ extension on double {
 }
 
 //final weatherNotifier = StateNotifierProvider((ref) => WeatherNotifier());
-final weatherNotifier = StateNotifierProvider<WeatherNotifier, WeatherState>((ref) => WeatherNotifier());
+final weatherNotifier = FutureProvider<WeatherNotifier>((ref) => WeatherNotifier());
