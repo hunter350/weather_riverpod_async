@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod_async/domain/weather_models.dart';
-
+import '../../state/theme/theme_state.dart';
 import '../../state/weather/weather_notifier.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -10,9 +10,12 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherNotifierIsCels = ref.watch(weatherNotifier);
+    final themeColor = ref.watch(themeState);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(
+          backgroundColor: themeColor.withOpacity(0.5),
+          title: const Text('Settings')),
       body: ListView(
         children: <Widget>[
           ListTile(

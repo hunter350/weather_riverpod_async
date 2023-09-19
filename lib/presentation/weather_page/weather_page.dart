@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_riverpod_async/state/theme/theme_state.dart';
 import '../../data/repository/model/models_repository.dart';
 import '../../main.dart';
 import '../../state/weather/weather_notifier.dart';
@@ -17,10 +18,13 @@ class WeatherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(weatherNotifier);
+    final themeColor = ref.watch(themeState);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Weather'),
+        title: const Text('Weather'),
+        backgroundColor: themeColor.withOpacity(0.5),
+        elevation: 0,
         actions: [
           IconButton(
               icon: const Icon(Icons.update),

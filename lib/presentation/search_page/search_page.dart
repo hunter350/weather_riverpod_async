@@ -24,8 +24,11 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeColor = ref.watch(themeState);
     return Scaffold(
-      appBar: AppBar(title: const Text('City Search')),
+      appBar: AppBar(
+          backgroundColor: themeColor.withOpacity(0.5),
+          title: const Text('City Search')),
       body: Row(
         children: [
           Expanded(

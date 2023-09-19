@@ -40,9 +40,9 @@ extension on WeatherModels {
       case WeatherCondition.snowy:
         return Colors.lightBlueAccent;
       case WeatherCondition.cloudy:
-        return Colors.blueGrey;
+        return Colors.blue;
       case WeatherCondition.rainy:
-        return Colors.indigoAccent;
+        return Colors.grey;
       case WeatherCondition.unknown:
         return ThemeState.defaultColor;
     }

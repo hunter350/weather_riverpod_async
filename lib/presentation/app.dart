@@ -44,7 +44,7 @@ class _WeatherAppState extends ConsumerState<WeatherApp> {
               .headline6,
         ),
       ),
-      home: WeatherPage(),
+      home: const WeatherPage(),
     );
   }
 }
