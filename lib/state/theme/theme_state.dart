@@ -3,34 +3,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repository/model/models_repository.dart';
 import '../../domain/weather_models.dart';
 
-
 class ThemeState extends StateNotifier<Color> {
-ThemeState() : super(defaultColor);
+  ThemeState() : super(defaultColor);
 
-static const defaultColor = Color(0xFF2196F3);
+  static const defaultColor = Color(0xFF2196F3);
 
-void updateTheme(WeatherModels? weather) {
-  //Color updateTheme(WeatherModels? weather) {
- // print("updateTheme Weather $weather");
-  if (weather != null) {
-    state = weather.toColor;
-   // print("updateTheme $state");
-   // return state;
-  }else{
-   // print("NotupdateTheme $state");
-   // return state;
+  void updateTheme(WeatherModels? weather) {
+    //Color updateTheme(WeatherModels? weather) {
+    // print("updateTheme Weather $weather");
+    if (weather != null) {
+      state = weather.toColor;
+      // print("updateTheme $state");
+      // return state;
+    } else {
+      // print("NotupdateTheme $state");
+      // return state;
+    }
   }
-}
 
-@override
-Color fromJson(Map<String, dynamic> json) {
-  return Color(int.parse(json['color'] as String));
-}
+  @override
+  Color fromJson(Map<String, dynamic> json) {
+    return Color(int.parse(json['color'] as String));
+  }
 
-@override
-Map<String, dynamic> toJson(Color state) {
-  return <String, String>{'color': '${state.value}'};
-}
+  @override
+  Map<String, dynamic> toJson(Color state) {
+    return <String, String>{'color': '${state.value}'};
+  }
 }
 
 extension on WeatherModels {
@@ -50,7 +49,8 @@ extension on WeatherModels {
   }
 }
 
-final themeState = StateNotifierProvider<ThemeState, Color>((ref) => ThemeState());
+final themeState =
+    StateNotifierProvider<ThemeState, Color>((ref) => ThemeState());
 
 // final colorState = Provider((ref)  {
 //   final theme1 = ref.watch(themeState.notifier);

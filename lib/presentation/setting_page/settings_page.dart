@@ -4,7 +4,6 @@ import 'package:weather_riverpod_async/domain/weather_models.dart';
 
 import '../../state/weather/weather_notifier.dart';
 
-
 //class SettingsPage extends StatelessWidget {
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -25,7 +24,7 @@ class SettingsPage extends ConsumerWidget {
     //final themeStateSetting = ref.watch(themeState);
     final weatherNotifierIsCels = ref.watch(weatherNotifier);
     //final weatherNotifierIsCels = ref.read(weatherNotifier.notifier).state;
-   // print('SettingPage status - ${weatherNotifierIsCels.status}');
+    // print('SettingPage status - ${weatherNotifierIsCels.status}');
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
@@ -44,13 +43,13 @@ class SettingsPage extends ConsumerWidget {
                 //state.temperatureUnits.isCelsius,
                 // onChanged: (_) => context.read<WeatherCubit>().toggleUnits(),
                 //Изменеям Цельсии в Фаренгейт
-                onChanged: (_) async{
+                onChanged: (_) async {
                   final weather = ref.read(weatherNotifier.notifier);
                   weather.toggleUnits();
-                 // weather.state.copyWith(status: WeatherStatus.success);
-                 //  String city = sharedPref.getString('city');
-                 //  //print('SettingPage status - ${weather.state.status}');
-                 //  print('SettingPage city - $city');
+                  // weather.state.copyWith(status: WeatherStatus.success);
+                  //  String city = sharedPref.getString('city');
+                  //  //print('SettingPage status - ${weather.state.status}');
+                  //  print('SettingPage city - $city');
                   // weather.refreshWeather();
                 }),
           )

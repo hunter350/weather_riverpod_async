@@ -4,14 +4,14 @@ import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 
 import '../../../data/repository/model/models_repository.dart';
 
-
 class WeatherEmptyNew extends StatelessWidget {
-   WeatherEmptyNew({super.key, this.weatherCondition});
- final WeatherCondition? weatherCondition;
+  WeatherEmptyNew({super.key, this.weatherCondition});
 
-   WeatherType weatherType = WeatherType.sunny;
+  final WeatherCondition? weatherCondition;
 
-  WeatherType getWeatherType(WeatherCondition weatherCondition){
+  WeatherType weatherType = WeatherType.sunny;
+
+  WeatherType getWeatherType(WeatherCondition weatherCondition) {
     switch (weatherCondition) {
       case WeatherCondition.clear:
         return WeatherType.sunny;
@@ -34,9 +34,9 @@ class WeatherEmptyNew extends StatelessWidget {
     weatherType = getWeatherType(weatherCondition!);
     debugPrint('### - $weatherCondition');
     return WeatherBg(
-          weatherType: weatherType,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-        );
+      weatherType: weatherType,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+    );
   }
 }

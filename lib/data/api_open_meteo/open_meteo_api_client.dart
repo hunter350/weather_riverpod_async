@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'models/location.dart';
 import 'models/weather_meteo_api.dart';
 
-
 /// Exception thrown when locationSearch fails.
 class LocationRequestFailure implements Exception {}
 

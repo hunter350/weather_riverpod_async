@@ -13,19 +13,12 @@ import 'widgets/weather_populated_new.dart';
 
 class WeatherPage extends ConsumerWidget {
   WeatherPage({super.key});
- // String city = '';
+
+  // String city = '';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   // final state = ref.watch(weatherNotifier);
-   //final city = ref.watch(cityProvider);
-   // final state1 = ref.listen(weatherNotifier, (previous, next) {
-   //   if(next.status == WeatherStatus.loading){
-   //     next.weatherModels.;
-   //   }
-   // });
-    String? cityShared = sharedPref.getString('city');
-
-   print('WeatherPage to city - $cityShared');
+     String? cityShared = sharedPref.getString('city');
+    final state = ref.watch(weatherNotifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,106 +28,91 @@ class WeatherPage extends ConsumerWidget {
               icon: const Icon(Icons.update),
               onPressed: () {
                 String? city = sharedPref.getString('city');
-                if(city != ''){
+                if (city != '') {
                   ref.read(weatherNotifier.notifier).fetchWeather(city);
                 }
-
-
-              }
-          ),
+              }),
           IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SettingsPage(),
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsPage(),
                     ));
-              }
-          ),
+              }),
         ],
       ),
       body: Center(
-        //  child: Consumer(builder: (context, ref, child) {
-child:Builder(builder: (BuildContext context) {
- // print('WeatherPage - Builder ${state.status}');
-  final state = ref.watch(weatherNotifier);
-  switch (state.status) {
-    case WeatherStatus.initial:
-    // if(city != ''){
-    //   //state1.fetchWeather(city);
-    //   return WeatherPopulatedNew(
-    //     weatherModels: state.weatherModels,
-    //     units: state.temperatureUnits,
-    //     onRefresh: () async{
-    //      // return await ref.read(weatherNotifier.notifier).refreshWeather();
-    //     },
-    //   );
-    // }else{
-      return  WeatherEmptyNew(weatherCondition: WeatherCondition.clear,);
-  // }
-
-    case WeatherStatus.loading:
-      return const WeatherLoading();
-    case WeatherStatus.success:
-      return WeatherPopulatedNew(
-        weatherModels: state.weatherModels,
-        units: state.temperatureUnits,
-        onRefresh: () async{
-          // return await ref.read(weatherNotifier.notifier).refreshWeather();
+          //  child: Consumer(builder: (context, ref, child) {
+          child: FutureBuilder(
+        initialData: state,
+        future: ref.read(futureWeatherNotifier.future),
+        builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
+          // print('WeatherPage - Builder ${state.status}');
+          if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+            // handle loading
+            return const WeatherLoading();
+          } else if (asyncSnapshot.hasData) {
+            // handle data
+            if (state.status == WeatherStatus.initial) {
+              return WeatherEmptyNew(
+                weatherCondition: WeatherCondition.clear,
+              );
+            } else {
+              return WeatherPopulatedNew(
+                weatherModels: state.weatherModels,
+                units: state.temperatureUnits,
+                onRefresh: () async {
+                  // return await ref.read(weatherNotifier.notifier).refreshWeather();
+                },
+              );
+            }
+          } else if (asyncSnapshot.hasError) {
+            // handle error (note: snapshot.error has type [Object?])
+            return const WeatherError();
+          } else {
+            // uh, oh, what goes here?
+            return Text('Some error occurred - welp!');
+          }
         },
-      );
-    case WeatherStatus.failure:
-      return const WeatherError();
-  }
-},)
-           //state1.status;
-//final state = ref.read(weatherNotifier.notifier).state;
 
-            //ref.invalidate(weatherNotifier);
-           // ref.refresh(provider)
-
-            //final state = ref.watch(weatherNotifier.notifier).state;
-
-          // final weather = state.weatherModels;
-          // final color1 = ref.watch(themeState.notifier).updateTheme(weather);
-
-           // print('weather_page_status: ${state.status}');
-
-
-
-         // },)
-        // BlocConsumer<WeatherCubit, WeatherState>(
-        //   listener: (context, state) {
-        //     if (state.status.isSuccess) {
-        //       context.read<ThemeCubit>().updateTheme(state.weather);
-        //     }
-        //   },
-        //   builder: (context, state) {
-        //     switch (state.status) {
-        //       case WeatherStatus.initial:
-        //         return const WeatherEmpty();
-        //       case WeatherStatus.loading:
-        //         return const WeatherLoading();
-        //       case WeatherStatus.success:
-        //         return WeatherPopulated(
-        //           weatherModels: state.weather,
-        //           units: state.temperatureUnits,
-        //           onRefresh: () {
-        //            // return context.read<WeatherCubit>().refreshWeather();
-        //           },
-        //         );
-        //       case WeatherStatus.failure:
-        //         return const WeatherError();
-        //     }
-        //   },
-        // ),
-      ),
+        // switch (state.status) {
+        //   case WeatherStatus.initial:
+        //   // if(city != ''){
+        //   //   //state1.fetchWeather(city);
+        //   //   return WeatherPopulatedNew(
+        //   //     weatherModels: state.weatherModels,
+        //   //     units: state.temperatureUnits,
+        //   //     onRefresh: () async{
+        //   //      // return await ref.read(weatherNotifier.notifier).refreshWeather();
+        //   //     },
+        //   //   );
+        //   // }else{
+        //     return  WeatherEmptyNew(weatherCondition: WeatherCondition.clear,);
+        // // }
+        //
+        //   case WeatherStatus.loading:
+        //     return const WeatherLoading();
+        //   case WeatherStatus.success:
+        //     return WeatherPopulatedNew(
+        //       weatherModels: state.weatherModels,
+        //       units: state.temperatureUnits,
+        //       onRefresh: () async{
+        //         // return await ref.read(weatherNotifier.notifier).refreshWeather();
+        //       },
+        //     );
+        //   case WeatherStatus.failure:
+        //     return const WeatherError();
+        // }
+      )),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.search, semanticLabel: 'Search'),
         onPressed: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SearchPage(),
+              MaterialPageRoute(
+                builder: (context) => const SearchPage(),
               ));
           // final city = await Navigator.of(context).push(SearchPage.route());
           // if (!mounted) return;
@@ -144,7 +122,6 @@ child:Builder(builder: (BuildContext context) {
     );
   }
 }
-
 
 // class WeatherPage extends ConsumerStatefulWidget {
 //   const WeatherPage({super.key});

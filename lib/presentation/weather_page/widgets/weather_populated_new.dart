@@ -6,7 +6,6 @@ import '../../../domain/weather_models.dart';
 import '../../../state/theme/theme_state.dart';
 import 'weather_empty_new.dart';
 
-
 class WeatherPopulatedNew extends ConsumerWidget {
   const WeatherPopulatedNew({
     super.key,
@@ -19,8 +18,7 @@ class WeatherPopulatedNew extends ConsumerWidget {
   final TemperatureUnits units;
   final ValueGetter<Future<void>> onRefresh;
 
-
-@override
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
     print('weather_populated_page:');
     final theme = Theme.of(context);
@@ -29,9 +27,9 @@ class WeatherPopulatedNew extends ConsumerWidget {
       children: [
         //_WeatherBackground(),
         WeatherEmptyNew(weatherCondition: weatherModels.condition),
-       RefreshIndicator(
-         onRefresh: onRefresh,
-         child: SingleChildScrollView(
+        RefreshIndicator(
+          onRefresh: onRefresh,
+          child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             clipBehavior: Clip.none,
             child: Center(
@@ -63,8 +61,6 @@ class WeatherPopulatedNew extends ConsumerWidget {
     );
   }
 }
-
-
 
 class _WeatherIcon extends StatelessWidget {
   const _WeatherIcon({required this.condition});
@@ -102,7 +98,7 @@ extension on WeatherCondition {
 class _WeatherBackground extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final color = ref.watch(themeState);//Здесь мы отслеживаем изменение темы
+    final color = ref.watch(themeState); //Здесь мы отслеживаем изменение темы
 
     return SizedBox.expand(
       child: DecoratedBox(
@@ -127,8 +123,8 @@ class _WeatherBackground extends ConsumerWidget {
 extension on Color {
   Color brighten([int percent = 10]) {
     assert(
-    1 <= percent && percent <= 100,
-    'percentage must be between 1 and 100',
+      1 <= percent && percent <= 100,
+      'percentage must be between 1 and 100',
     );
     final p = percent / 100;
     return Color.fromARGB(

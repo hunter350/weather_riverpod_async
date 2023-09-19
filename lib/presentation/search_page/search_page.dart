@@ -5,7 +5,6 @@ import '../../main.dart';
 import '../../state/theme/theme_state.dart';
 import '../../state/weather/weather_notifier.dart';
 
-
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
 
@@ -60,7 +59,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                 //Основная проблема была в том, что возвращалось будущее
                 // и нужно было обыграть с  async await. И затем сделать then
                 //И после этого все заработало!!!
-                if(_text.isNotEmpty){
+                if (_text.isNotEmpty) {
                   sharedPref.setString('city', _text);
                 }
                 await weatherNotifier1.fetchWeather(_text).then((value) {

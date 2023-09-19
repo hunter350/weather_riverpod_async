@@ -4,9 +4,8 @@ import 'package:weather_riverpod_async/state/weather/weather_state.dart';
 import '../../data/repository/weather_repository.dart';
 import '../../domain/weather_models.dart';
 
-
-class WeatherNotifier extends StateNotifier<WeatherState>{
- // WeatherNotifier(this._weatherRepository) : super(WeatherState());
+class WeatherNotifier extends StateNotifier<WeatherState> {
+  // WeatherNotifier(this._weatherRepository) : super(WeatherState());
   WeatherNotifier() : super(WeatherState());
 
   final WeatherRepository _weatherRepository = WeatherRepository();
@@ -25,13 +24,12 @@ class WeatherNotifier extends StateNotifier<WeatherState>{
           ? weather.temperature.value.toFahrenheit()
           : weather.temperature.value;
 
-
-      state =  state.copyWith(
-          status: WeatherStatus.success,
-          temperatureUnits: units,
-          weatherModels: weather.copyWith(temperature: Temperature(value: value)),
-        );
-   //   print('search_page_status getWeather: ${state.toString()}');
+      state = state.copyWith(
+        status: WeatherStatus.success,
+        temperatureUnits: units,
+        weatherModels: weather.copyWith(temperature: Temperature(value: value)),
+      );
+      //   print('search_page_status getWeather: ${state.toString()}');
     } on Exception {
       state = state.copyWith(status: WeatherStatus.failure);
     }
@@ -49,13 +47,11 @@ class WeatherNotifier extends StateNotifier<WeatherState>{
           ? weather.temperature.value.toFahrenheit()
           : weather.temperature.value;
 
-
-       state =  state.copyWith(
-          status: WeatherStatus.success,
-          temperatureUnits: units,
-          weatherModels: weather.copyWith(temperature: Temperature(value: value)),
-        );
-
+      state = state.copyWith(
+        status: WeatherStatus.success,
+        temperatureUnits: units,
+        weatherModels: weather.copyWith(temperature: Temperature(value: value)),
+      );
     } on Exception {
       state = state;
     }
@@ -65,7 +61,7 @@ class WeatherNotifier extends StateNotifier<WeatherState>{
     final units = state.temperatureUnits.isFahrenheit
         ? TemperatureUnits.celsius
         : TemperatureUnits.fahrenheit;
-   // state = state.copyWith(status: WeatherStatus.success);
+    // state = state.copyWith(status: WeatherStatus.success);
     if (!state.status.isSuccess) {
       state = state.copyWith(temperatureUnits: units);
       return;
@@ -78,10 +74,10 @@ class WeatherNotifier extends StateNotifier<WeatherState>{
           ? temperature.value.toCelsius()
           : temperature.value.toFahrenheit();
       state = state.copyWith(
-          temperatureUnits: units,
+        temperatureUnits: units,
         weatherModels: weather.copyWith(temperature: Temperature(value: value)),
-        );
-    //  );
+      );
+      //  );
     }
   }
 
@@ -95,8 +91,15 @@ class WeatherNotifier extends StateNotifier<WeatherState>{
 
 extension on double {
   double toFahrenheit() => (this * 9 / 5) + 32;
+
   double toCelsius() => (this - 32) * 5 / 9;
 }
 
 //final weatherNotifier = StateNotifierProvider((ref) => WeatherNotifier());
-final weatherNotifier = FutureProvider<WeatherNotifier>((ref) => WeatherNotifier());
+final weatherNotifier = StateNotifierProvider<WeatherNotifier, WeatherState>(
+    (ref) => WeatherNotifier());
+final futureWeatherNotifier = FutureProvider((ref) {
+  final futureWeather = ref.watch(weatherNotifier);
+  // futureWeather.fetchWeather(city);
+  return futureWeather;
+});

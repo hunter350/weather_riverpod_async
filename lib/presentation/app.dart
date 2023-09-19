@@ -6,7 +6,6 @@ import '../state/theme/theme_state.dart';
 import '../state/weather/weather_notifier.dart';
 import 'weather_page/weather_page.dart';
 
-
 String? cityFromShared = sharedPref.getString('city');
 
 class WeatherApp extends ConsumerStatefulWidget {
@@ -17,20 +16,22 @@ class WeatherApp extends ConsumerStatefulWidget {
 }
 
 class _WeatherAppState extends ConsumerState<WeatherApp> {
- //   String city = '';
- // // //
- // @override
- //  void didChangeDependencies() async{
- //   if(sharedPref.getString('city') != ''){
- //     // state.copyWith (status: WeatherStatus.success );
- //    // print('WeatherPage to ${state.status}');
- //     city = sharedPref.getString('city');
- //     // String city = sharedPref.getString('city');
- //     final state = ref.read(weatherNotifier.notifier);
- //     state.fetchWeather(city).then((value) => setState(() {}));
- //   }
- //    super.didChangeDependencies();
- //  }
+  String? city = '';
+
+  // // //
+  @override
+  void didChangeDependencies() async {
+    if (sharedPref.getString('city') != '') {
+      // state.copyWith (status: WeatherStatus.success );
+      // print('WeatherPage to ${state.status}');
+      city = sharedPref.getString('city');
+      // String city = sharedPref.getString('city');
+      final state = await ref.read(weatherNotifier.notifier);
+      state.fetchWeather(city);
+      //state.fetchWeather(city).then((value) => setState(() {}));
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +57,8 @@ class _WeatherAppState extends ConsumerState<WeatherApp> {
   }
 }
 
-final cityProvider = FutureProvider((ref) {
-  if(cityFromShared != ''){
-    ref.read(weatherNotifier.notifier).fetchWeather(cityFromShared);
-  }
-});
+// final cityProvider = FutureProvider((ref) {
+//   if(cityFromShared != ''){
+//     ref.read(weatherNotifier.notifier).fetchWeather(cityFromShared);
+//   }
+// });

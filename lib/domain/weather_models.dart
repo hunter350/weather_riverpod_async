@@ -3,13 +3,13 @@ import 'package:json_annotation/json_annotation.dart';
 import '../data/repository/model/models_repository.dart' as weather_repository;
 import '../data/repository/model/models_repository.dart';
 
-
 part 'weather_models.g.dart';
 
 enum TemperatureUnits { fahrenheit, celsius }
 
 extension TemperatureUnitsX on TemperatureUnits {
   bool get isFahrenheit => this == TemperatureUnits.fahrenheit;
+
   bool get isCelsius => this == TemperatureUnits.celsius;
 }
 
@@ -40,7 +40,8 @@ class WeatherModels extends Equatable {
   factory WeatherModels.fromJson(Map<String, dynamic> json) =>
       _$WeatherModelsFromJson(json);
 
-  factory WeatherModels.fromRepository(weather_repository.WeatherSrcRepository weather) {
+  factory WeatherModels.fromRepository(
+      weather_repository.WeatherSrcRepository weather) {
     return WeatherModels(
       condition: weather.condition,
       lastUpdated: DateTime.now(),
