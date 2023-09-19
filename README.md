@@ -8,7 +8,7 @@ and make animation with depends conditions.
 
 ## Architecture
 
-This application uses a layered architecture, using the example of the Black package, only we use Riverpad:
+This application uses a layered architecture, using the example of the Black package, only we use Riverpod:
 1. Presentation
 2. State
 3. Domain
