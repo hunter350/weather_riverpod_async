@@ -1,5 +1,5 @@
 <h1>
-  <img src="https://github.com/hunter350/weather_riverpod_async/blob/master/icon_git_v1.png" alt="Image" width="30" style="border-radius: 10px;">  Weather riverpod async</img>
+  <img src="https://github.com/hunter350/weather_riverpod_async/blob/master/icon_git_v1.png" alt="Image" width="38" style="border-radius: 10px;">  Weather riverpod async</img>
 </h1>
 
 
