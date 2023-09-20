@@ -19,6 +19,7 @@ class WeatherPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(weatherNotifier);
     final themeColor = ref.watch(themeState);
+    final weatherFuture = ref.watch(futureWeatherNotifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -46,66 +47,64 @@ class WeatherPage extends ConsumerWidget {
         ],
       ),
       body: Center(
-        child: FutureBuilder(
-          initialData: state,
-          future: ref.read(futureWeatherNotifier.future),
-          builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
-            // print('WeatherPage - Builder ${state.status}');
-            if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-              // handle loading
-              return const WeatherLoading();
-            } else if (asyncSnapshot.hasData) {
-              // handle data
-              if (state.status == WeatherStatus.initial) {
-                return WeatherEmptyNew(
-                  weatherCondition: WeatherCondition.clear,
-                );
-              } else {
-                return WeatherPopulatedNew(
-                  weatherModels: state.weatherModels,
-                  units: state.temperatureUnits,
-                  onRefresh: () async {
-                    // return await ref.read(weatherNotifier.notifier).refreshWeather();
-                  },
-                );
-              }
-            } else if (asyncSnapshot.hasError) {
-              // handle error (note: snapshot.error has type [Object?])
-              return const WeatherError();
-            } else {
-              // uh, oh, what goes here?
-              return const Text('Some error occurred - welp!');
-            }
-          },
+        child:
+            //1. Use FutureBuilder
+        // FutureBuilder(
+        //   initialData: state,
+        //   future: ref.read(futureWeatherNotifier.future),
+        //   builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
+        //     // print('WeatherPage - Builder ${state.status}');
+        //     if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+        //       // handle loading
+        //       return const WeatherLoading();
+        //     } else if (asyncSnapshot.hasData) {
+        //       // handle data
+        //       if (state.status == WeatherStatus.initial) {
+        //         return WeatherEmptyNew(
+        //           weatherCondition: WeatherCondition.clear,
+        //         );
+        //       } else {
+        //         return WeatherPopulatedNew(
+        //           weatherModels: state.weatherModels,
+        //           units: state.temperatureUnits,
+        //           onRefresh: () async {
+        //             // return await ref.read(weatherNotifier.notifier).refreshWeather();
+        //           },
+        //         );
+        //       }
+        //     } else if (asyncSnapshot.hasError) {
+        //       // handle error (note: snapshot.error has type [Object?])
+        //       return const WeatherError();
+        //     } else {
+        //       // uh, oh, what goes here?
+        //       return const Text('Some error occurred - welp!');
+        //     }
+        //   },
+        // ),
 
-          // switch (state.status) {
-          //   case WeatherStatus.initial:
-          //   // if(city != ''){
-          //   //   //state1.fetchWeather(city);
-          //   //   return WeatherPopulatedNew(
-          //   //     weatherModels: state.weatherModels,
-          //   //     units: state.temperatureUnits,
-          //   //     onRefresh: () async{
-          //   //      // return await ref.read(weatherNotifier.notifier).refreshWeather();
-          //   //     },
-          //   //   );
-          //   // }else{
-          //     return  WeatherEmptyNew(weatherCondition: WeatherCondition.clear,);
-          // // }
-          //
-          //   case WeatherStatus.loading:
-          //     return const WeatherLoading();
-          //   case WeatherStatus.success:
-          //     return WeatherPopulatedNew(
-          //       weatherModels: state.weatherModels,
-          //       units: state.temperatureUnits,
-          //       onRefresh: () async{
-          //         // return await ref.read(weatherNotifier.notifier).refreshWeather();
-          //       },
-          //     );
-          //   case WeatherStatus.failure:
-          //     return const WeatherError();
-          // }
+          //2. AsyncValue
+        weatherFuture.when(
+            data: (data){
+                    if (state.status == WeatherStatus.initial) {
+                      return WeatherEmptyNew(
+                        weatherCondition: WeatherCondition.clear,
+                      );
+                    } else {
+                      return WeatherPopulatedNew(
+                        weatherModels: state.weatherModels,
+                        units: state.temperatureUnits,
+                        onRefresh: () async {
+                          // return await ref.read(weatherNotifier.notifier).refreshWeather();
+                        },
+                      );
+                    }
+            },
+            error: (e, st){
+              return const WeatherError();
+            },
+            loading: (){
+              return const WeatherLoading();
+            },
         ),
       ),
       floatingActionButton: FloatingActionButton(
