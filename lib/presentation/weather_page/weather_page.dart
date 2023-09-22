@@ -38,6 +38,7 @@ class WeatherPage extends ConsumerWidget {
                 }
               }),
           IconButton(
+              key: const Key('icon_button _setting'),
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
