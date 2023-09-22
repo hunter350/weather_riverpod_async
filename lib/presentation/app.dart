@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../main.dart';
+import '../state/shared_notifier.dart';
 import '../state/theme/theme_state.dart';
 import '../state/weather/weather_notifier.dart';
 import 'weather_page/weather_page.dart';
@@ -14,14 +15,13 @@ class WeatherApp extends ConsumerStatefulWidget {
 }
 
 class _WeatherAppState extends ConsumerState<WeatherApp> {
-  String? city = '';
-
   @override
   void didChangeDependencies() async {
-    if (sharedPref.getString('city') != '') {
-      city = sharedPref.getString('city');
-      final state = await ref.read(weatherNotifier.notifier);
-      state.fetchWeather(city);
+    final sharedPref = await ref.read(sharedPreferencesProvider);
+    final cityShared = sharedPref.getString('city');
+    if (cityShared != '') {
+      final state = ref.read(weatherNotifier.notifier);
+      state.fetchWeather('$cityShared');
     }
     super.didChangeDependencies();
   }

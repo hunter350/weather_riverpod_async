@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'presentation/app.dart';
-
-late final SharedPreferences sharedPref;
+import 'state/shared_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  sharedPref = await SharedPreferences.getInstance();
-  if (sharedPref.getString('city') == null) {
-    sharedPref.setString('city', '');
+  final sharedPreferences = await SharedPreferences.getInstance();
+  if (sharedPreferences.getString('city') == null) {
+    sharedPreferences.setString('city', '');
   }
-  runApp(const ProviderScope(child: WeatherApp()));
+  runApp(ProviderScope(overrides: [
+    // override the previous value with the new object
+    sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+  ], child: const WeatherApp()));
 }

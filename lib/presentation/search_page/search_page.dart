@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../main.dart';
+import '../../state/shared_notifier.dart';
 import '../../state/theme/theme_state.dart';
 import '../../state/weather/weather_notifier.dart';
 
@@ -52,7 +52,14 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                 // и нужно было обыграть с  async await. И затем сделать then
                 //И после этого все заработало!!!
                 if (_text.isNotEmpty) {
-                  sharedPref.setString('city', _text);
+                  // cityShared.setString('city', _text);
+                  final sharedPref = await ref.read(sharedPreferencesProvider);
+                  await sharedPref.setString('city', _text);
+                  // sharedPref.when(
+                  //    loading: () => '',
+                  //    error: (e,s) => '',
+                  //     data: (data) => data.setString('city', _text)
+                  // );
                 }
                 await weatherNotifier1.fetchWeather(_text).then((value) {
                   final theme1 = ref
@@ -61,7 +68,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
                   Navigator.of(context).pop();
                 });
-              }),
+              })
         ],
       ),
     );

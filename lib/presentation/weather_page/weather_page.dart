@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_riverpod_async/state/theme/theme_state.dart';
 import '../../data/repository/model/models_repository.dart';
-import '../../main.dart';
+import '../../state/shared_notifier.dart';
 import '../../state/weather/weather_notifier.dart';
 import '../../state/weather/weather_state.dart';
 import '../search_page/search_page.dart';
@@ -29,8 +29,10 @@ class WeatherPage extends ConsumerWidget {
         actions: [
           IconButton(
               icon: const Icon(Icons.update),
-              onPressed: () {
-                String? city = sharedPref.getString('city');
+              onPressed: () async {
+                final sharedPref = await ref.read(sharedPreferencesProvider);
+                // await sharedPref.setString('city', _text);
+                final city = await sharedPref.getString('city');
                 if (city != '') {
                   ref.read(weatherNotifier.notifier).fetchWeather(city);
                 }
@@ -49,62 +51,62 @@ class WeatherPage extends ConsumerWidget {
       body: Center(
         child:
             //1. Use FutureBuilder
-        // FutureBuilder(
-        //   initialData: state,
-        //   future: ref.read(futureWeatherNotifier.future),
-        //   builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
-        //     // print('WeatherPage - Builder ${state.status}');
-        //     if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-        //       // handle loading
-        //       return const WeatherLoading();
-        //     } else if (asyncSnapshot.hasData) {
-        //       // handle data
-        //       if (state.status == WeatherStatus.initial) {
-        //         return WeatherEmptyNew(
-        //           weatherCondition: WeatherCondition.clear,
-        //         );
-        //       } else {
-        //         return WeatherPopulatedNew(
-        //           weatherModels: state.weatherModels,
-        //           units: state.temperatureUnits,
-        //           onRefresh: () async {
-        //             // return await ref.read(weatherNotifier.notifier).refreshWeather();
-        //           },
-        //         );
-        //       }
-        //     } else if (asyncSnapshot.hasError) {
-        //       // handle error (note: snapshot.error has type [Object?])
-        //       return const WeatherError();
-        //     } else {
-        //       // uh, oh, what goes here?
-        //       return const Text('Some error occurred - welp!');
-        //     }
-        //   },
-        // ),
+            // FutureBuilder(
+            //   initialData: state,
+            //   future: ref.read(futureWeatherNotifier.future),
+            //   builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
+            //     // print('WeatherPage - Builder ${state.status}');
+            //     if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+            //       // handle loading
+            //       return const WeatherLoading();
+            //     } else if (asyncSnapshot.hasData) {
+            //       // handle data
+            //       if (state.status == WeatherStatus.initial) {
+            //         return WeatherEmptyNew(
+            //           weatherCondition: WeatherCondition.clear,
+            //         );
+            //       } else {
+            //         return WeatherPopulatedNew(
+            //           weatherModels: state.weatherModels,
+            //           units: state.temperatureUnits,
+            //           onRefresh: () async {
+            //             // return await ref.read(weatherNotifier.notifier).refreshWeather();
+            //           },
+            //         );
+            //       }
+            //     } else if (asyncSnapshot.hasError) {
+            //       // handle error (note: snapshot.error has type [Object?])
+            //       return const WeatherError();
+            //     } else {
+            //       // uh, oh, what goes here?
+            //       return const Text('Some error occurred - welp!');
+            //     }
+            //   },
+            // ),
 
-          //2. AsyncValue
-        weatherFuture.when(
-            data: (data){
-                    if (state.status == WeatherStatus.initial) {
-                      return WeatherEmptyNew(
-                        weatherCondition: WeatherCondition.clear,
-                      );
-                    } else {
-                      return WeatherPopulatedNew(
-                        weatherModels: state.weatherModels,
-                        units: state.temperatureUnits,
-                        onRefresh: () async {
-                          // return await ref.read(weatherNotifier.notifier).refreshWeather();
-                        },
-                      );
-                    }
-            },
-            error: (e, st){
-              return const WeatherError();
-            },
-            loading: (){
-              return const WeatherLoading();
-            },
+            //2. AsyncValue
+            weatherFuture.when(
+          data: (data) {
+            if (state.status == WeatherStatus.initial) {
+              return WeatherEmptyNew(
+                weatherCondition: WeatherCondition.clear,
+              );
+            } else {
+              return WeatherPopulatedNew(
+                weatherModels: state.weatherModels,
+                units: state.temperatureUnits,
+                onRefresh: () async {
+                  // return await ref.read(weatherNotifier.notifier).refreshWeather();
+                },
+              );
+            }
+          },
+          error: (e, st) {
+            return const WeatherError();
+          },
+          loading: () {
+            return const WeatherLoading();
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
