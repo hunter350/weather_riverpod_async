@@ -3,27 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:riverpod_weather/weather/models/weather_models.dart';
-import 'package:riverpod_weather/weather/state/weather_state.dart';
-import 'package:riverpod_weather/weather/widgets/populated/weather_populated_new.dart';
-import 'package:riverpod_weather/weather/widgets/widgets.dart';
-import 'package:riverpod_weather/weather_repository/weather_repository.dart';
+import 'package:weather_riverpod_async/data/repository/model/models_repository.dart';
+import 'package:weather_riverpod_async/domain/weather_models.dart';
+import 'package:weather_riverpod_async/presentation/weather_page/widgets/weather_populated_new.dart';
+import 'package:weather_riverpod_async/state/weather/weather_state.dart';
 
 class Listener extends Mock {
   void call(WeatherState? previous, WeatherState value);
 }
 
 void main() {
-  // final container = ProviderContainer();
-  // // addTearDown(container.dispose);
-  // final listener = Listener();
-  //
-  // // Observe a provider and spy the changes.
-  // container.listen(
-  //   weatherNotifier,
-  //   listener,
-  //   fireImmediately: true,
-  // );
 
   group('WeatherPopulated', () {
     final weather = WeatherModels(
@@ -34,12 +23,6 @@ void main() {
     );
 
     testWidgets('renders correct emoji (clear)', (tester) async {
-      // final focus = container.readProviderElement(weatherNotifier);
-      // focus.setState(WeatherState(
-      //     status: WeatherStatus.loading,
-      //   temperatureUnits: TemperatureUnits.fahrenheit,
-      //   weatherModels: weather
-      // ));
       await tester.pumpWidget(
         ProviderScope(
          // parent: container,
@@ -63,7 +46,7 @@ void main() {
         //  parent: container,
           child: MaterialApp(
             home: Scaffold(
-              body: WeatherPopulated(
+              body: WeatherPopulatedNew(
                 weatherModels: weather.copyWith(condition: WeatherCondition.rainy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
@@ -81,7 +64,7 @@ void main() {
        //   parent: container,
           child: MaterialApp(
             home: Scaffold(
-              body: WeatherPopulated(
+              body: WeatherPopulatedNew(
                 weatherModels: weather.copyWith(condition: WeatherCondition.cloudy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
@@ -98,7 +81,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: WeatherPopulated(
+              body: WeatherPopulatedNew(
                 weatherModels: weather.copyWith(condition: WeatherCondition.snowy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
@@ -115,7 +98,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: WeatherPopulated(
+              body: WeatherPopulatedNew(
                 weatherModels: weather.copyWith(condition: WeatherCondition.unknown),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
