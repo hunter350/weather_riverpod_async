@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
-
 import '../../../data/repository/model/models_repository.dart';
 
 class WeatherEmptyNew extends StatelessWidget {

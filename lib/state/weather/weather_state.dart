@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 import '../../domain/weather_models.dart';
 
 part 'weather_state.g.dart';

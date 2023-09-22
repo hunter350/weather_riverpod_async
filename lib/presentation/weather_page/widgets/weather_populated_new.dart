@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../data/repository/model/models_repository.dart';
 import '../../../domain/weather_models.dart';
 import '../../../state/theme/theme_state.dart';
