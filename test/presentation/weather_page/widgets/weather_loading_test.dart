@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_weather/weather/widgets/widgets.dart';
+import 'package:weather_riverpod_async/presentation/weather_page/widgets/weather_loading.dart';
 
 void main() {
   group('WeatherLoading', () {
