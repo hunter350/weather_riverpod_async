@@ -13,6 +13,7 @@ const weatherCondition = WeatherCondition.rainy;
 const weatherTemperature = 9.8;
 
 //final weatherNotifierProvider = StateNotifierProvider<WeatherNotifier, WeatherState>((ref) => WeatherNotifier());
+//Todo: Переработать тесты, здесь очень много можно добавить
 
 class Listener extends Mock {
   void call(WeatherState? previous, WeatherState value);
