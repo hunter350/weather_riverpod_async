@@ -22,7 +22,6 @@ class Listener extends Mock {
 //late SharedPreferences sharedPref;
 
 void main() async {
-
   SharedPreferences sharedPref = await initShared();
 
   final container = ProviderContainer();
@@ -39,12 +38,10 @@ void main() async {
   group('WeatherApp', () {
     testWidgets('renders WeatherApp', (tester) async {
       await tester.pumpWidget(
-        ProviderScope(
-            overrides: [
-              // override the previous value with the new object
-              sharedPreferencesProvider.overrideWithValue(sharedPref),
-            ],
-            child: WeatherApp()),
+        ProviderScope(overrides: [
+          // override the previous value with the new object
+          sharedPreferencesProvider.overrideWithValue(sharedPref),
+        ], child: WeatherApp()),
       );
       expect(find.byType(WeatherApp), findsOneWidget);
     });

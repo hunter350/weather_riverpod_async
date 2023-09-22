@@ -8,7 +8,7 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
   // WeatherNotifier(this._weatherRepository) : super(WeatherState());
   WeatherNotifier() : super(WeatherState());
 
- // final WeatherRepository _weatherRepository = WeatherRepository();
+  // final WeatherRepository _weatherRepository = WeatherRepository();
   //Inject WeatherRepository()
   WeatherRepository _overrideRepository() {
     final container = ProviderContainer();
@@ -25,7 +25,7 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
 
     try {
       final weather = WeatherModels.fromRepository(
-       // await _weatherRepository.getWeather(city),
+        // await _weatherRepository.getWeather(city),
         await weatherProv.getWeather(city),
       );
       final units = state.temperatureUnits;
@@ -53,7 +53,7 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
 
     try {
       final weather = WeatherModels.fromRepository(
-       // await _weatherRepository.getWeather(state.weatherModels.location),
+        // await _weatherRepository.getWeather(state.weatherModels.location),
         await weatherProv.getWeather(state.weatherModels.location),
       );
       final units = state.temperatureUnits;
@@ -119,4 +119,4 @@ final futureWeatherNotifier = FutureProvider((ref) {
 });
 
 //Inject WeatherRepository
-final repository = Provider<WeatherRepository>((ref) =>  WeatherRepository());
+final repository = Provider<WeatherRepository>((ref) => WeatherRepository());

@@ -13,7 +13,6 @@ class Listener extends Mock {
 }
 
 void main() {
-
   group('WeatherPopulated', () {
     final weather = WeatherModels(
       condition: WeatherCondition.clear,
@@ -25,7 +24,7 @@ void main() {
     testWidgets('renders correct emoji (clear)', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-         // parent: container,
+          // parent: container,
           child: MaterialApp(
             home: Scaffold(
               body: WeatherPopulatedNew(
@@ -43,11 +42,12 @@ void main() {
     testWidgets('renders correct emoji (rainy)', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-        //  parent: container,
+          //  parent: container,
           child: MaterialApp(
             home: Scaffold(
               body: WeatherPopulatedNew(
-                weatherModels: weather.copyWith(condition: WeatherCondition.rainy),
+                weatherModels:
+                    weather.copyWith(condition: WeatherCondition.rainy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
               ),
@@ -61,11 +61,12 @@ void main() {
     testWidgets('renders correct emoji (cloudy)', (tester) async {
       await tester.pumpWidget(
         ProviderScope(
-       //   parent: container,
+          //   parent: container,
           child: MaterialApp(
             home: Scaffold(
               body: WeatherPopulatedNew(
-                weatherModels: weather.copyWith(condition: WeatherCondition.cloudy),
+                weatherModels:
+                    weather.copyWith(condition: WeatherCondition.cloudy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
               ),
@@ -82,7 +83,8 @@ void main() {
           child: MaterialApp(
             home: Scaffold(
               body: WeatherPopulatedNew(
-                weatherModels: weather.copyWith(condition: WeatherCondition.snowy),
+                weatherModels:
+                    weather.copyWith(condition: WeatherCondition.snowy),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
               ),
@@ -99,7 +101,8 @@ void main() {
           child: MaterialApp(
             home: Scaffold(
               body: WeatherPopulatedNew(
-                weatherModels: weather.copyWith(condition: WeatherCondition.unknown),
+                weatherModels:
+                    weather.copyWith(condition: WeatherCondition.unknown),
                 units: TemperatureUnits.fahrenheit,
                 onRefresh: () async {},
               ),

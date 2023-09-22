@@ -12,7 +12,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: WeatherEmptyNew(weatherCondition: condition,),
+            body: WeatherEmptyNew(
+              weatherCondition: condition,
+            ),
           ),
         ),
       );

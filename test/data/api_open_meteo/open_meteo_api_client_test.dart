@@ -42,7 +42,7 @@ void main() {
           await apiClient.locationSearch(query);
         } catch (_) {}
         verify(
-              () => httpClient.get(
+          () => httpClient.get(
             Uri.https(
               'geocoding-api.open-meteo.com',
               '/v1/search',
@@ -57,7 +57,7 @@ void main() {
         when(() => response.statusCode).thenReturn(400);
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-              () async => apiClient.locationSearch(query),
+          () async => apiClient.locationSearch(query),
           throwsA(isA<LocationRequestFailure>()),
         );
       });
@@ -126,7 +126,7 @@ void main() {
           await apiClient.getWeather(latitude: latitude, longitude: longitude);
         } catch (_) {}
         verify(
-              () => httpClient.get(
+          () => httpClient.get(
             Uri.https('api.open-meteo.com', 'v1/forecast', {
               'latitude': '$latitude',
               'longitude': '$longitude',
@@ -141,7 +141,7 @@ void main() {
         when(() => response.statusCode).thenReturn(400);
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-              () async => apiClient.getWeather(
+          () async => apiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
           ),
@@ -155,7 +155,7 @@ void main() {
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-              () async => apiClient.getWeather(
+          () async => apiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
           ),

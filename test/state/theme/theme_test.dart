@@ -36,8 +36,9 @@ void main() {
 
   group('ThemeCubit', () {
     test('initial state is correct', () {
-      final stateColor = container.readProviderElement(themeState).getState()!.requireState;
-     // expect(ThemeCubit().state, ThemeCubit.defaultColor);
+      final stateColor =
+          container.readProviderElement(themeState).getState()!.requireState;
+      // expect(ThemeCubit().state, ThemeCubit.defaultColor);
       expect(stateColor, ThemeState.defaultColor);
     });
 
@@ -59,13 +60,15 @@ void main() {
       final unknownWeather = MockWeather(WeatherCondition.unknown);
 
       test('emits correct color for WeatherCondition.clear', () {
-       // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
-        container.read(themeState.notifier).updateTheme(WeatherModels(condition: WeatherCondition.clear,
-          lastUpdated: DateTime(0),
-          temperature: const Temperature(value: 0),
-          location: '--',
-        ));
-        Color? color = container.readProviderElement(themeState).getState()!.requireState;
+        // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
+        container.read(themeState.notifier).updateTheme(WeatherModels(
+              condition: WeatherCondition.clear,
+              lastUpdated: DateTime(0),
+              temperature: const Temperature(value: 0),
+              location: '--',
+            ));
+        Color? color =
+            container.readProviderElement(themeState).getState()!.requireState;
         expect(color, Colors.orangeAccent);
       });
 
@@ -78,12 +81,14 @@ void main() {
 
       test('emits correct color for WeatherCondition.clear', () {
         // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
-        container.read(themeState.notifier).updateTheme(WeatherModels(condition: WeatherCondition.snowy,
-          lastUpdated: DateTime(0),
-          temperature: const Temperature(value: 0),
-          location: '--',
-        ));
-        Color? color = container.readProviderElement(themeState).getState()!.requireState;
+        container.read(themeState.notifier).updateTheme(WeatherModels(
+              condition: WeatherCondition.snowy,
+              lastUpdated: DateTime(0),
+              temperature: const Temperature(value: 0),
+              location: '--',
+            ));
+        Color? color =
+            container.readProviderElement(themeState).getState()!.requireState;
         expect(color, Colors.lightBlueAccent);
       });
       // blocTest<ThemeCubit, Color>(
@@ -95,12 +100,14 @@ void main() {
 
       test('emits correct color for WeatherCondition.cloudy', () {
         // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
-        container.read(themeState.notifier).updateTheme(WeatherModels(condition: WeatherCondition.cloudy,
-          lastUpdated: DateTime(0),
-          temperature: const Temperature(value: 0),
-          location: '--',
-        ));
-        Color? color = container.readProviderElement(themeState).getState()!.requireState;
+        container.read(themeState.notifier).updateTheme(WeatherModels(
+              condition: WeatherCondition.cloudy,
+              lastUpdated: DateTime(0),
+              temperature: const Temperature(value: 0),
+              location: '--',
+            ));
+        Color? color =
+            container.readProviderElement(themeState).getState()!.requireState;
         expect(color, Colors.blue);
       });
       // blocTest<ThemeCubit, Color>(
@@ -112,12 +119,14 @@ void main() {
 
       test('emits correct color for WeatherCondition.rainy', () {
         // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
-        container.read(themeState.notifier).updateTheme(WeatherModels(condition: WeatherCondition.rainy,
-          lastUpdated: DateTime(0),
-          temperature: const Temperature(value: 0),
-          location: '--',
-        ));
-        Color? color = container.readProviderElement(themeState).getState()!.requireState;
+        container.read(themeState.notifier).updateTheme(WeatherModels(
+              condition: WeatherCondition.rainy,
+              lastUpdated: DateTime(0),
+              temperature: const Temperature(value: 0),
+              location: '--',
+            ));
+        Color? color =
+            container.readProviderElement(themeState).getState()!.requireState;
         expect(color, Colors.grey);
       });
       // blocTest<ThemeCubit, Color>(
@@ -129,12 +138,14 @@ void main() {
 
       test('emits correct color for WeatherCondition.unknown', () {
         // container.readProviderElement(themeState).setState(ThemeState().updateTheme(WeatherModels().to))
-        container.read(themeState.notifier).updateTheme(WeatherModels(condition: WeatherCondition.unknown,
-          lastUpdated: DateTime(0),
-          temperature: const Temperature(value: 0),
-          location: '--',
-        ));
-        Color? color = container.readProviderElement(themeState).getState()!.requireState;
+        container.read(themeState.notifier).updateTheme(WeatherModels(
+              condition: WeatherCondition.unknown,
+              lastUpdated: DateTime(0),
+              temperature: const Temperature(value: 0),
+              location: '--',
+            ));
+        Color? color =
+            container.readProviderElement(themeState).getState()!.requireState;
         expect(color, ThemeState.defaultColor);
       });
       // blocTest<ThemeCubit, Color>(

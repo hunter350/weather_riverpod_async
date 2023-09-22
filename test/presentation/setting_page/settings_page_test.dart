@@ -11,30 +11,27 @@ import 'package:weather_riverpod_async/state/weather/weather_notifier.dart';
 import 'package:weather_riverpod_async/state/weather/weather_state.dart';
 import '../../shared_pref_init.dart';
 
-
 // class MockWeatherCubit extends MockCubit<WeatherState> implements WeatherCubit {
 // }
 
-
 class Listener extends Mock {
-  void call( WeatherState? previous,  WeatherState next);
+  void call(WeatherState? previous, WeatherState next);
 }
 //final weatherProvider = Provider((ref) => weatherNotifier);
 
-void main() async{
+void main() async {
   SharedPreferences sharedPref = await initShared();
   final container = ProviderContainer();
 
   final listener = Listener();
 
   group('SettingsPage', () {
-
     setUp(() {
-    //  weatherCubit = MockWeatherCubit();
+      //  weatherCubit = MockWeatherCubit();
     });
 
     testWidgets('is routable', (tester) async {
-     //when(() => weatherCubit.state).thenReturn(WeatherState());
+      //when(() => weatherCubit.state).thenReturn(WeatherState());
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -49,7 +46,8 @@ void main() async{
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SettingsPage(),
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
                         ));
                   },
                 ),
@@ -78,7 +76,8 @@ void main() async{
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SettingsPage(),
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
                         ));
                   },
                 ),
@@ -92,14 +91,20 @@ void main() async{
       await tester.tap(find.byType(Switch));
       //В блоке этот тест проверяет была ли вызвана функция toggleUnits()
       //Но я проверил, изменилось ли значение с Цельсия на Фаренгейт!
-      var fahrenheitTemp = container.readProviderElement(weatherNotifier).requireState.temperatureUnits;
-    expect(fahrenheitTemp, TemperatureUnits.fahrenheit);
-       await tester.tap(find.byType(Switch));
+      var fahrenheitTemp = container
+          .readProviderElement(weatherNotifier)
+          .requireState
+          .temperatureUnits;
+      expect(fahrenheitTemp, TemperatureUnits.fahrenheit);
+      await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
-     // final celsiusTemp = container.readProviderElement(weatherNotifier).requireState.temperatureUnits;
-      fahrenheitTemp = container.readProviderElement(weatherNotifier).requireState.temperatureUnits;
+      // final celsiusTemp = container.readProviderElement(weatherNotifier).requireState.temperatureUnits;
+      fahrenheitTemp = container
+          .readProviderElement(weatherNotifier)
+          .requireState
+          .temperatureUnits;
       expect(fahrenheitTemp, TemperatureUnits.celsius);
-     // verify(() => weatherCubit.toggleUnits()).called(1);
+      // verify(() => weatherCubit.toggleUnits()).called(1);
     });
 
     // testWidgets('calls toggleUnits when switch is changed', (tester) async {
