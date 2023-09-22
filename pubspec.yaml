@@ -14,8 +14,6 @@ dependencies:
   http:
   equatable:
   google_fonts: 4.0.1
-  #flutter_bloc:
-  #bloc: ^8.0.3
   flutter_weather_bg_null_safety:
   shared_preferences:
 
@@ -29,7 +27,6 @@ dev_dependencies:
   coverage: ^1.0.3
   custom_lint:
   riverpod_lint:
-  #bloc_test: ^9.1.0
 
 flutter:
   uses-material-design: true
