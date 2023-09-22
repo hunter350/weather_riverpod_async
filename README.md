@@ -19,3 +19,5 @@ To make the application more interesting, we have added animations depending on 
 
 https://github.com/hunter350/weather_riverpod_async/assets/71131485/d74bfff9-a859-458c-9a4a-90ec18273035
 
+## Test Coverage
+More 80%
