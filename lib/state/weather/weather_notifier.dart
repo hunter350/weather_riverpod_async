@@ -8,16 +8,25 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
   // WeatherNotifier(this._weatherRepository) : super(WeatherState());
   WeatherNotifier() : super(WeatherState());
 
-  final WeatherRepository _weatherRepository = WeatherRepository();
+ // final WeatherRepository _weatherRepository = WeatherRepository();
+  //Inject WeatherRepository()
+  WeatherRepository _overrideRepository() {
+    final container = ProviderContainer();
+    return container.read(repository);
+  }
 
   Future<void> fetchWeather(String? city) async {
     if (city == null || city.isEmpty) return;
 
     state = state.copyWith(status: WeatherStatus.loading);
 
+    //Inject WeatherRepository()
+    final weatherProv = _overrideRepository();
+
     try {
       final weather = WeatherModels.fromRepository(
-        await _weatherRepository.getWeather(city),
+       // await _weatherRepository.getWeather(city),
+        await weatherProv.getWeather(city),
       );
       final units = state.temperatureUnits;
       final value = units.isFahrenheit
@@ -38,9 +47,14 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
   Future<void> refreshWeather() async {
     if (!state.status.isSuccess) return;
     if (state.weatherModels == WeatherModels.empty) return;
+
+    //Inject WeatherRepository()
+    final weatherProv = _overrideRepository();
+
     try {
       final weather = WeatherModels.fromRepository(
-        await _weatherRepository.getWeather(state.weatherModels.location),
+       // await _weatherRepository.getWeather(state.weatherModels.location),
+        await weatherProv.getWeather(state.weatherModels.location),
       );
       final units = state.temperatureUnits;
       final value = units.isFahrenheit
@@ -103,3 +117,6 @@ final futureWeatherNotifier = FutureProvider((ref) {
   // futureWeather.fetchWeather(city);
   return futureWeather;
 });
+
+//Inject WeatherRepository
+final repository = Provider<WeatherRepository>((ref) =>  WeatherRepository());
