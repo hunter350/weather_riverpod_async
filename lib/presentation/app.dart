@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../main.dart';
 import '../state/shared_notifier.dart';
 import '../state/theme/theme_state.dart';
 import '../state/weather/weather_notifier.dart';

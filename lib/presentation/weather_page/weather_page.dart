@@ -30,11 +30,11 @@ class WeatherPage extends ConsumerWidget {
           IconButton(
               icon: const Icon(Icons.update),
               onPressed: () async {
-                final sharedPref = await ref.read(sharedPreferencesProvider);
+                final sharedPref = ref.read(sharedPreferencesProvider);
                 // await sharedPref.setString('city', _text);
-                final city = await sharedPref.getString('city');
+                final city = sharedPref.getString('city');
                 if (city != '') {
-                  ref.read(weatherNotifier.notifier).fetchWeather(city);
+                 await ref.read(weatherNotifier.notifier).fetchWeather(city);
                 }
               }),
           IconButton(
